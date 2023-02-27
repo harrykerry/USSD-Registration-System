@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('Second_Name')->nullable();
             $table->string('Church_Name')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('Sub_County')->nullable();
             $table->timestamps();
         });
     }

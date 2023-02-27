@@ -19,6 +19,7 @@ class eventRegistration extends Model
     $this->First_Name = $data['FirstName'];
     $this->Second = $data['SecondName'];
     $this->Church_Name = $data['ChurchName'];
+    $this->Sub_County = $data['SubCounty'];
     $this->mobile = $data['mobile'];
 
     return $this->save() ? true : false;

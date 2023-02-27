@@ -24,7 +24,7 @@ class ussdMenuController extends Controller
 
         if ($lastInput == "80") {
 
-            $response = "CON Welcome to Event Registration Please select an option\n1.Register";
+            $response = "CON Welcome to Love Nairobi Festival Launch. Please select an option\n1.Register";
             return response($response)->header('Content-Type', 'text/plain');
         } elseif ($lastInput == "1") {
 
@@ -55,13 +55,20 @@ class ussdMenuController extends Controller
             }else if(!$registration->Second_Name){
                 DB::table('event_registrations')->where('mobile', $msisdn)->update(['Second_Name' => $lastInput]);
 
-            $response = "CON Enter Church Name";
+            $response = "CON Enter Church/Organization name represented";
 
-            return response($response)->header('Content-Type', 'text/plaun');
+            return response($response)->header('Content-Type', 'text/plain');
 
-            }else if($registration->Church_Name){
+            }else if(!$registration->Church_Name){
+            DB::table('event_registrations')->where('mobile', $msisdn)->update(['Church_Name' => $lastInput]);
 
-                DB::table('event_registrations')->where('mobile', $msisdn)->update(['Church_Name' => $lastInput]);
+        $response = "CON Enter Sub-County Name";
+
+        return response($response)->header('Content-Type', 'text/plain');
+
+            }else if($registration->Sub_County){
+
+                DB::table('event_registrations')->where('mobile', $msisdn)->update(['Sub_County' => $lastInput]);
             $response = "Registration Succesful";
 
             return response($response)->header('Content-Type', 'text/plain');
