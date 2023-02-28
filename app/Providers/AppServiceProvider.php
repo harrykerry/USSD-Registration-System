@@ -20,13 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-<<<<<<< HEAD
         //
 
-	
-=======
+       Schema::defaultStringLength(191);	
         // 
         Paginator::useBootstrap();
->>>>>>> cfb4d9f31f8db9dcdbc21798cbad814c984692ac
+
     }
 }
