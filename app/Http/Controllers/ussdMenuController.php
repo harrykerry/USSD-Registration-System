@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\eventRegistration;
+use App\Http\Controllers\sendSMS\SmsAlertController;
 use Illuminate\Support\Facades\DB;
 
 class ussdMenuController extends Controller
@@ -44,22 +45,15 @@ class ussdMenuController extends Controller
 
             $registration = DB::table('event_registrations')->where('mobile', $msisdn)->first();
             
-            if (!$registration->First_Name){
+            if (!$registration->name){
 
-                DB::table('event_registrations')->where('mobile', $msisdn)->update(['First_Name' => $lastInput]);
-
-            $response = "CON Enter your second name:";
-
-            return  response($response)->header('Content-Type', 'text/plain');
-
-            }else if(!$registration->Second_Name){
-                DB::table('event_registrations')->where('mobile', $msisdn)->update(['Second_Name' => $lastInput]);
+                DB::table('event_registrations')->where('mobile', $msisdn)->update(['name' => $lastInput]);
 
             $response = "CON Enter Church/Organization name represented";
 
-            return response($response)->header('Content-Type', 'text/plain');
+            return  response($response)->header('Content-Type', 'text/plain');
 
-            }else if(!$registration->Church_Name){
+           }else if(!$registration->Church_Name){
             DB::table('event_registrations')->where('mobile', $msisdn)->update(['Church_Name' => $lastInput]);
 
         $response = "CON Enter Sub-County Name";
@@ -75,6 +69,8 @@ class ussdMenuController extends Controller
 
             }else{
                 $response = "END You are registered";
+                $sendSMS = new SmsAlertController();
+                $resp = $sendSMS->sendSMS($msisdn);
 
             return response($response)->header('Content-Type', 'text/plain');
 
