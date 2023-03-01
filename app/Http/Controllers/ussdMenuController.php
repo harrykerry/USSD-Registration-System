@@ -48,14 +48,14 @@ class ussdMenuController extends Controller
 
             $registration = DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->first();
 
-            if (!$registration->name && !$registration->Church_Name) {
+            if (!$registration->name && !$registration->Church_Name && !$registration->Sub_County) {
 
                 DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['name' => $lastInput]);
 
                 $response = "CON Enter Name Of Church/Organization represented";
 
                 return  response($response)->header('Content-Type', 'text/plain');
-            } else if (!$registration->Church_Name && !$registration->Sub_County  ) {
+            } else if ($registration->name && !$registration->Church_Name && !$registration->Sub_County) {
                 DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['Church_Name' => $lastInput]);
 
                 $response = "CON Enter Sub-County Name";
