@@ -38,7 +38,7 @@ class ussdMenuController extends Controller
             } else {
                 DB::table('event_registrations')->insert(['mobile' => $msisdn]);
                 
-                $response = "CON Enter First Name";
+                $response = "CON Enter Full Name";
                 return response($response)->header('Content-Type', 'text/plain');
             }
         } elseif ($lastInput != ''){
@@ -49,7 +49,7 @@ class ussdMenuController extends Controller
 
                 DB::table('event_registrations')->where('mobile', $msisdn)->update(['name' => $lastInput]);
 
-            $response = "CON Enter Church/Organization name represented";
+            $response = "CON Enter Name Of Church/Organization represented";
 
             return  response($response)->header('Content-Type', 'text/plain');
 
