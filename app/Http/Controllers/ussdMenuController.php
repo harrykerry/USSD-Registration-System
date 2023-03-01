@@ -32,13 +32,13 @@ class ussdMenuController extends Controller
         } elseif ($lastInput == "1") {
 
 
-            $mobile = DB::table('event_registrations')->where('mobile', $msisdn)->first();
+            $mobile = DB::table('event_registrations')->where('mobile', $msisdn)->where('status',1)->first();
 
             if ($mobile) {
                 $response = "END You are already registered";
                 return response($response)->header('Content-Type', 'text/plain');
             } else {
-                DB::table('event_registrations')->insert(['mobile' => $msisdn]);
+                DB::table('event_registrations')->insertOrIgnore(['mobile' => $msisdn]);
 
                 $response = "CON Enter Full Name";
                 return response($response)->header('Content-Type', 'text/plain');
