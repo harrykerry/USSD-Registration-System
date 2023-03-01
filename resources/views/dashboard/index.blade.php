@@ -29,7 +29,10 @@
                 <h2 class="resize-text">    
                     LOVE FESTIVAL NAIROBI
                 </h2>
+                <button class="btn btn-secondary" onclick="window.location.href='{{ url('/event') }}'">Back</button>
+
             </div>
+
         </div>
             <div class="form-group row mt-3">
                 <div class="col-md-10">
