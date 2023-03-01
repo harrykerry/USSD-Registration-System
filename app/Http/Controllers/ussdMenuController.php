@@ -71,20 +71,20 @@ class ussdMenuController extends Controller
 
             if (!$registration->name && !$registration->Church_Name && !$registration->Sub_County) {
 
-                DB::table('event_registrations')->where('mobile', $msisdn)->where('status', '0')->update(['name' => $lastInput]);
+                DB::table('event_registrations')->where('mobile', $msisdn)->where('status', '0')->update(['name' => $lastInput,'created_at' => $currentTime]);
 
                 $response = "CON Enter Name Of Church/Organization represented";
 
                 return  response($response)->header('Content-Type', 'text/plain');
             } else if ($registration->name && !$registration->Church_Name && !$registration->Sub_County) {
-                DB::table('event_registrations')->where('mobile', $msisdn)->where('status', '0')->update(['Church_Name' => $lastInput]);
+                DB::table('event_registrations')->where('mobile', $msisdn)->where('status', '0')->update(['Church_Name' => $lastInput,'created_at' => $currentTime]);
 
                 $response = "CON Enter Sub-County Name";
 
                 return response($response)->header('Content-Type', 'text/plain');
             } else {
 
-                DB::table('event_registrations')->where('mobile', $msisdn)->where('status', '0')->update(['Sub_County' => $lastInput, 'status' => '1']);
+                DB::table('event_registrations')->where('mobile', $msisdn)->where('status', '0')->update(['Sub_County' => $lastInput, 'status' => '1','created_at' => $currentTime]);
                 $sendSMS = new SmsAlertController();
                 $resp = $sendSMS->sendSMS($msisdn);
 
