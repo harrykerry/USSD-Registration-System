@@ -48,7 +48,7 @@ class ussdMenuController extends Controller
 
             $registration = DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->first();
 
-            if (!$registration->name || !$registration->Church_Name) {
+            if (!$registration->name && !$registration->Church_Name) {
 
                 DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['name' => $lastInput]);
 
