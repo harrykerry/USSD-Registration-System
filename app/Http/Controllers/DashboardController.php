@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $event = eventRegistration::where('status', 1)->paginate(5);
+        $event = eventRegistration::where('status', 1)->orderByDesc('id')->paginate(5);
         return view('dashboard.index', compact('event'));
     }
 
