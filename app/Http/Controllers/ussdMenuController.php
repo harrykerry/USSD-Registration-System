@@ -39,31 +39,31 @@ class ussdMenuController extends Controller
                 $response = "END You are already registered";
                 return response($response)->header('Content-Type', 'text/plain');
             } else {
-                DB::table('event_registrations')->where('status', '0')->insertOrIgnore(['mobile' => $msisdn]);
+                DB::table('event_registrations')->insert(['mobile' => $msisdn]);
 
                 $response = "CON Enter Full Name";
                 return response($response)->header('Content-Type', 'text/plain');
             }
         } elseif ($lastInput != '') {
 
-            $registration = DB::table('event_registrations')->where('mobile', $msisdn)->first();
+            $registration = DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->first();
 
             if (!$registration->name) {
 
-                DB::table('event_registrations')->where('mobile', $msisdn)->update(['name' => $lastInput]);
+                DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['name' => $lastInput]);
 
                 $response = "CON Enter Name Of Church/Organization represented";
 
                 return  response($response)->header('Content-Type', 'text/plain');
             } else if (!$registration->Church_Name) {
-                DB::table('event_registrations')->where('mobile', $msisdn)->update(['Church_Name' => $lastInput]);
+                DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['Church_Name' => $lastInput]);
 
                 $response = "CON Enter Sub-County Name";
 
                 return response($response)->header('Content-Type', 'text/plain');
             } else {
 
-                DB::table('event_registrations')->where('mobile', $msisdn)->update(['Sub_County' => $lastInput,'status' => 1]);
+                DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['Sub_County' => $lastInput,'status' => '1']);
                 $sendSMS = new SmsAlertController();
                 $resp = $sendSMS->sendSMS($msisdn);
 
