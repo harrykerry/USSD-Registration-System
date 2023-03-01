@@ -32,7 +32,7 @@ class ussdMenuController extends Controller
         } elseif ($lastInput == "1") {
 
 
-            $mobile = DB::table('event_registrations')->where('mobile', $msisdn)->where('status', 1)->first();
+            $mobile = DB::table('event_registrations')->where('mobile', $msisdn)->first();
 
             if ($mobile) {
                 $response = "END You are already registered";
@@ -45,7 +45,7 @@ class ussdMenuController extends Controller
             }
         } elseif ($lastInput != '') {
 
-            $registration = DB::table('event_registrations')->where('mobile', $msisdn)->first();
+            $registration = DB::table('event_registrations')->where('mobile', $msisdn)->where('status', 0)->first();
 
             if (!$registration->name) {
 
