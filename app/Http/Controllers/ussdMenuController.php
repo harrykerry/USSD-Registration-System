@@ -39,10 +39,23 @@ class ussdMenuController extends Controller
                 $response = "END You are already registered";
                 return response($response)->header('Content-Type', 'text/plain');
             } else {
-                DB::table('event_registrations')->insertOrIgnore(['mobile' => $msisdn]);
+
+                $mobile = DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->first();
+
+                if($mobile){
 
                 $response = "CON Enter Full Name";
                 return response($response)->header('Content-Type', 'text/plain');
+
+                } else{
+                    
+                    DB::table('event_registrations')->insertOrIgnore(['mobile' => $msisdn]);
+                    $response = "CON Enter Full Name";
+                    return response($response)->header('Content-Type', 'text/plain');
+                
+                }
+
+                
             }
         } elseif ($lastInput != '') {
 
