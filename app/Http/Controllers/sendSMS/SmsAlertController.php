@@ -31,7 +31,7 @@ class SmsAlertController extends Controller
                 'apikey' => '64f46f5e7d59ab7d8f56b2797e99dd68',
                 'partnerID' => '6911',
                 'mobile' => $data,
-                'message' => 'You are registered for Love Festival Nairobi',
+                'message' => 'Thank you for registering for the Love Nairobi Festival Launch',
                 'shortcode' => '20133',
                 'pass_type' => 'plain',
             ],
