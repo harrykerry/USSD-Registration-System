@@ -39,7 +39,7 @@ class ussdMenuController extends Controller
                 $response = "END You are already registered";
                 return response($response)->header('Content-Type', 'text/plain');
             } else {
-                DB::table('event_registrations')->insert(['mobile' => $msisdn]);
+                DB::table('event_registrations')->insertOrIgnore(['mobile' => $msisdn]);
 
                 $response = "CON Enter Full Name";
                 return response($response)->header('Content-Type', 'text/plain');
@@ -48,14 +48,14 @@ class ussdMenuController extends Controller
 
             $registration = DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->first();
 
-            if (!$registration->name) {
+            if (!$registration->name || !$registration->Church_Name) {
 
                 DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['name' => $lastInput]);
 
                 $response = "CON Enter Name Of Church/Organization represented";
 
                 return  response($response)->header('Content-Type', 'text/plain');
-            } else if (!$registration->Church_Name) {
+            } else if (!$registration->Church_Name || !$registration->Sub_County  ) {
                 DB::table('event_registrations')->where('mobile', $msisdn)->where('status','0')->update(['Church_Name' => $lastInput]);
 
                 $response = "CON Enter Sub-County Name";
