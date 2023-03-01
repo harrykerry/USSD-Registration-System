@@ -26,7 +26,7 @@ class ussdMenuController extends Controller
         $currentTime = Carbon::now();
 
 
-        if ($lastInput == "80") {
+        if ($lastInput == "76") {
 
             $response = "CON Welcome to Love Nairobi Festival Launch. Please select an option\n1.Register";
             return response($response)->header('Content-Type', 'text/plain');
