@@ -47,10 +47,10 @@ class SmsAlertController extends Controller
                     'Content-Type' => 'application/json',
                 ],
                 'json' => [
-                    'apikey' => '64f46f5e7d59ab7d8f56b2797e99dd68',
-                    'partnerID' => '6911',
+                    'apikey' => 'xxxx',
+                    'partnerID' => 'xxxx',
                     'mobile' => $data,
-                    'message' => 'Thank you for registering for the Love Nairobi Festival Launch',
+                    'message' => 'Thank you for registering xxxx',
                     'shortcode' => $senderID,
                     'pass_type' => 'plain',
                 ],
