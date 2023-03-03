@@ -19,10 +19,10 @@ class SmsAlertController extends Controller
         switch($network){
 
             case 'Safaricom':
-                return $this->send($data,'20133');
+                return $this->send($data,'xxxxxx');
                 break;
             case 'Airtel':
-                return $this->send($data,'LOVENRBFEST');
+                return $this->send($data,'xxxxx');
                 break;
 
             default:
