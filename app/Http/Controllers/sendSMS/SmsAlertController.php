@@ -22,7 +22,7 @@ class SmsAlertController extends Controller
                 return $this->send($data,'20133');
                 break;
             case 'Airtel':
-                return $this->send($data,'LOVENRBFEST ');
+                return $this->send($data,'LOVENRBFEST');
                 break;
 
             default:
